@@ -45,6 +45,42 @@ True
 '''
 
 # Write your code here:
+class Invoice:
+    """
+    Let's create a class to manage invoices. Its constructor will take
+    an invoice number, the customer name, and the amount of money owed.
+    """
+    def __init__(self, number, customer, amount):
+        self.number = number
+        self.customer = customer
+        self.amount = amount
+    def total_payments(self):
+        """
+        docstring
+        """
+        return 0
+    def amount_due(self):
+        """
+        docstring
+        """
+        return 0
+    def add_payment(self):
+        """
+        docstring
+        """
+        return 0
+    def is_fully_paid(self):
+        """
+        docstring
+        """
+        return 0
+    def amount_due(self):
+        """
+        docstring
+        """
+        return 0
+    
+
 
 
 
