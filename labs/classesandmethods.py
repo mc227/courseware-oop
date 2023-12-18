@@ -51,37 +51,35 @@ class Invoice:
     an invoice number, the customer name, and the amount of money owed.
     """
     def __init__(self, number, customer, amount):
+        """
+        docstring
+        """
         self.number = number
         self.customer = customer
         self.amount = amount
-    def total_payments(self):
+        self.total_payments = 0
+
+    def add_payment(self,payment):
         """
         docstring
         """
-        return 0
-    def amount_due(self):
-        """
-        docstring
-        """
-        return 0
-    def add_payment(self):
-        """
-        docstring
-        """
-        return 0
+        self.total_payments += payment
+        self.amount -= payment
+
     def is_fully_paid(self):
         """
         docstring
         """
-        return 0
+        if self.amount == 0:
+            return True
+        else:
+            return False
+
     def amount_due(self):
         """
         docstring
         """
-        return 0
-    
-
-
+        return self.amount
 
 
 # Do not edit any code below this line!
