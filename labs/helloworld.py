@@ -31,6 +31,17 @@ Pro tips:
 '''
 
 # Write your code here:
+def hello(something):
+    """
+    prints "Hello, something!"
+    """
+    return f"Hello, {something}!"
+
+def print_hello(something):
+    '''
+    docstring
+    '''
+    print(f"Hello, {something}!")
 
 
 
