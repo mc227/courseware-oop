@@ -77,6 +77,24 @@ The add_invoice() method takes an instance of the Invoice class.
 20.0
 
 >>> account.apply_payment(20)
+>>> now_unpaid = account.unpaid_invoices()
+>>> len(now_unpaid)
+2
+>>> now_unpaid[0].number
+2
+>>> account.total_due()
+55.0
+
+>>> account.apply_payment(10)
+>>> account.total_due()
+45.0
+>>> len(account.unpaid_invoices())
+2
+
+>>> account.apply_payment(45)
+>>> len(account.unpaid_invoices())
+0
+
 '''
 # Write your code here:
 class CustomerAccount:
@@ -90,36 +108,41 @@ class CustomerAccount:
     def __init__(self, name):
         self.name = name
         self.invoices = []
-        self.unpaid_invoices_list = []
 
     def add_invoice(self,invoice):
         """
         The add_invoice() method takes an instance of the Invoice class.
         """
         self.invoices.append(invoice)
-    # def total_due(self):
-    #     """
-    #     total due
-    #     """
-    #     total = 0
-    #     for item in self.invoices:
-    #         total += item.amount_due()
-    #     return total
+
     def total_due(self):
         """
         total due using list comprehension
         """
-        return sum(item.amount_due() for item in self.invoices)
+        return sum(invoice.amount_due() for invoice in self.invoices)
 
     def unpaid_invoices(self):
         """
         unpaid_invoices
         """
-        for item in self.invoices:
-            if not item.is_fully_paid():
-                self.unpaid_invoices_list.append(item)
-        return self.unpaid_invoices_list
+        items = []
+        for invoice in self.invoices:
+            if not invoice.is_fully_paid():
+                items.append(invoice)
+        return items
 
+    def apply_payment(self, amount):
+        """
+        apply payment
+        """
+        for invoice in self.unpaid_invoices():
+            due = invoice.amount_due()
+            if due < amount:
+                invoice.add_payment(due)
+                amount -= due
+            else:
+                invoice.add_payment(amount)
+                break
 class Invoice:
     """
     Let's create a class to manage invoices. 
@@ -134,6 +157,7 @@ class Invoice:
         self.customer = customer
         self.amount = amount
         self.total_payments = 0
+
     def add_payment(self,payment):
         """
         add_payment
@@ -143,13 +167,12 @@ class Invoice:
         """
         is fully paid?
         """
-        return (self.amount - self.total_payments) == 0
+        return self.total_payments >= self.amount
     def amount_due(self):
         """
         amount due?
         """
         return self.amount - self.total_payments
-
 
 # Do not edit any code below this line!
 
