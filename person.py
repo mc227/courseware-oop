@@ -9,7 +9,7 @@ class Person:
         self.first = first
         self.middle = middle
         self.last = last
-        
+
     def full_name(self):
         """
         docstring
