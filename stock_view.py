@@ -25,3 +25,10 @@ class StockView:
         """
         params = self.params(model)
         return '{name}: ${price:0.2f} ({sentiment})'.format_map(params)
+
+if __name__ == "__main__":
+    from stock_model import StockModel
+    model = StockModel('AAPL', 159.29, 163.05, 44035531, 22509937)
+    view = StockView()
+    print(view.render(model))
+    
