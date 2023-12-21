@@ -36,7 +36,7 @@ class Cat:
         describe
         """
         return 'the cat says: Meow!'
-        
+
 if __name__ == "__main__":
     fido = Dog("Fido")
     print(fido.describe())
